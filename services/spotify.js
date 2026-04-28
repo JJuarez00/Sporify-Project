@@ -2,9 +2,10 @@
 This script handles all Spotify API interactions
 Public token for catalog searches, user tokens for personal data
 */
+
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
-const REDIRECT_URI = process.env.SPOTIFY_REDIRECT_URI;
+const REDIRECT_URI = 'http://localhost:3000/callback';
 const SCOPES = 'user-top-read user-read-recently-played user-read-private';
 const spotifyPreviewFinder = require('spotify-preview-finder');
 
