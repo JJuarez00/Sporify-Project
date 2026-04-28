@@ -1,0 +1,33 @@
+/* Buttons */
+.btn-logout {
+	padding: 6px 14px;
+	background-color: rgba(231, 76, 60, 0.14);
+	color: var(--danger);
+	border: 1px solid var(--danger);
+	border-radius: 6px;
+	font-size: 0.8rem;
+	cursor: pointer;
+	transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-logout:hover {
+	background-color: var(--danger);
+	color: #fff;
+}
+
+.btn-export {
+	padding: 12px 24px;
+	background-color: var(--brand);
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	width: 100%;
+}
+
+.btn-export:hover {
+	background-color: var(--brand-hover);
+}
+

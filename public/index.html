@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>dawnFM*</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+
+	<div id="navMount" data-active="home"></div>
+
+	<main class="container">
+
+		<section id="hero" class="hero-section">
+			<h1 id="heroTitle" class="hero-title anim">Welcome</h1>
+			<p id="heroSub" class="hero-sub anim">This Is My Final Project For N320</p>
+			<p id="heroCourse" class="hero-sub anim">Intermediate Media Application Development</p>
+		</section>
+
+		<section id="aboutSection" class="about-section">
+			<h2 id="aboutTitle" class="anim">How does my final project work?</h2>
+			<div class="about-grid">
+				<div class="about-card anim">
+					<h3>Your Top Tracks</h3>
+					<p>See what songs you have been playing the most over the last 4 weeks, 6 months, or all time.</p>
+				</div>
+				<div class="about-card anim">
+					<h3>Your Top Artists</h3>
+					<p>Find out which artists dominate your listening history and discover your music taste.</p>
+				</div>
+				<div class="about-card anim">
+					<h3>Export Your Stats</h3>
+					<p>Download a simple PDF report with your current top tracks and artists.</p>
+				</div>
+				<div class="about-card anim">
+					<h3>Search Any Artist</h3>
+					<p>Look up any artist on Spotify and see track results from the Spotify Search API. No login required.</p>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+	<footer class="site-footer">
+		<button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch theme">☾</button>
+	</footer>
+
+	<script src="js/components/nav.js"></script>
+	<script src="js/utils/theme.js"></script>
+	<script src="js/pages/home.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+.documentation-header {
+	padding: 56px 0 24px;
+	text-align: center;
+}
+
+.documentation-header h1 {
+	margin-bottom: 12px;
+	font-size: 2.8rem;
+	color: var(--text);
+}
+
+.documentation-header p {
+	max-width: 620px;
+	margin: 0 auto;
+	color: var(--muted);
+	line-height: 1.6;
+}
+
+.documentation-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 16px;
+	padding-bottom: 72px;
+}
+
+.documentation-section {
+	padding: 24px;
+	background-color: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 10px;
+}
+
+.documentation-section h2 {
+	margin-bottom: 10px;
+	font-size: 1.15rem;
+	color: var(--brand);
+}
+
+.documentation-section p,
+.documentation-section li {
+	color: var(--muted);
+	line-height: 1.6;
+}
+
+.documentation-section ul {
+	margin: 10px 0 0 18px;
+}
+
+.documentation-section code {
+	padding: 2px 6px;
+	background-color: var(--field);
+	border: 1px solid var(--border);
+	border-radius: 5px;
+	color: var(--text);
+	font-family: Consolas, Monaco, monospace;
+	font-size: 0.9em;
+}
+
+.diagram-placeholder {
+	margin-top: 14px;
+	padding: 18px;
+	border: 1px dashed var(--border-strong);
+	border-radius: 8px;
+	color: var(--faint);
+	text-align: center;
+}
+
+@media (max-width: 599px) {
+	.documentation-header {
+		padding-top: 36px;
+	}
+
+	.documentation-header h1 {
+		font-size: 2.1rem;
+	}
+
+	.documentation-section {
+		padding: 20px;
+	}
+}

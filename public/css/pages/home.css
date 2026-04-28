@@ -1,0 +1,148 @@
+/* Hero Section */
+.hero-section {
+	text-align: center;
+	padding: 60px 0;
+}
+
+.hero-eyebrow {
+	font-size: 0.9rem;
+	color: var(--brand);
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	margin-bottom: 16px;
+}
+
+.hero-title {
+	font-size: 4rem;
+	font-weight: bold;
+	margin-bottom: 16px;
+	color: var(--text);
+}
+
+.hero-sub {
+	font-size: 1.1rem;
+	color: var(--muted);
+	margin-bottom: 30px;
+	max-width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.hero-actions {
+	margin-top: 20px;
+}
+
+.btn-login {
+	display: inline-block;
+	padding: 14px 32px;
+	background-color: var(--spotify);
+	color: #fff;
+	text-decoration: none;
+	border-radius: 30px;
+	font-size: 1rem;
+	font-weight: bold;
+	transition: background-color 0.3s;
+}
+
+.btn-login:hover {
+	background-color: var(--spotify-hover);
+}
+
+
+/* About Section */
+.about-section {
+	padding: 40px 0;
+}
+
+.about-section h2 {
+	text-align: center;
+	font-size: 1.5rem;
+	margin-bottom: 30px;
+}
+
+.about-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px;
+}
+
+.about-card {
+	background-color: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 10px;
+	padding: 24px;
+	transition: border-color 0.3s;
+}
+
+.about-card:hover {
+	border-color: var(--brand);
+}
+
+.about-card h3 {
+	font-size: 1rem;
+	margin-bottom: 8px;
+	color: var(--brand);
+}
+
+.about-card p {
+	font-size: 0.9rem;
+	color: var(--muted);
+	line-height: 1.5;
+}
+
+
+/* Large screens */
+@media (min-width: 1200px) {
+	.hero-title {
+		font-size: 4.4rem;
+	}
+}
+
+
+/* Medium screens */
+@media (min-width: 900px) and (max-width: 1199px) {
+	.hero-section {
+		padding: 72px 0;
+	}
+
+	.hero-title {
+		font-size: 4.2rem;
+	}
+
+	.about-card {
+		padding: 28px;
+	}
+}
+
+
+/* Tablet */
+@media (min-width: 600px) and (max-width: 899px) {
+	.hero-title {
+		font-size: 3.4rem;
+	}
+
+	.about-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+
+/* Phone */
+@media (max-width: 599px) {
+	.hero-section {
+		padding: 44px 0;
+	}
+
+	.hero-title {
+		font-size: 2.7rem;
+	}
+
+	.hero-sub {
+		font-size: 1rem;
+	}
+
+	.about-grid {
+		grid-template-columns: 1fr;
+	}
+}
+

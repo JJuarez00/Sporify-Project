@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>dawnFM* - Search</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+
+	<div id="navMount" data-active="search"></div>
+
+	<main class="container">
+
+		<section class="search-section anim">
+			<h2 id="searchTitle">Search Artists</h2>
+			<p class="search-note">
+				Spotify removed the artist top-tracks endpoint for dev-mode apps, so this page uses Spotify Search for track results. Audio previews are found with spotify-preview-finder when a preview clip is available. <a href="https://developer.spotify.com/documentation/web-api/reference/get-an-artists-top-tracks" target="_blank" rel="noopener">Spotify endpoint reference</a>
+			</p>
+			<div class="search-bar">
+				<input type="text" id="searchInput" placeholder="Search for an artist...">
+				<button id="searchBtn">Search</button>
+			</div>
+			<div id="searchResults" class="artist-grid"></div>
+		</section>
+
+		<p id="message" class="message"></p>
+
+	</main>
+
+	<div id="artistModal" class="modal-overlay" style="display: none;">
+		<div class="modal-content">
+			<button id="closeModal" class="modal-close">X</button>
+			<div id="modalBody"></div>
+		</div>
+	</div>
+
+	<footer class="site-footer">
+		<button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch theme">☾</button>
+	</footer>
+
+	<script src="js/components/nav.js"></script>
+	<script src="js/utils/theme.js"></script>
+	<script src="js/models/Track.js"></script>
+	<script src="js/models/Artist.js"></script>
+	<script src="js/pages/search.js"></script>
+
+</body>
+</html>

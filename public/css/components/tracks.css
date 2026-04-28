@@ -1,0 +1,105 @@
+/* Track Cards */
+.track-list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 94%;
+	max-width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.track-card {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	padding: 10px;
+	background-color: var(--surface);
+	border-radius: 8px;
+	border: 1px solid var(--border);
+	transition: border-color 0.3s;
+}
+
+.track-card:hover {
+	border-color: var(--brand);
+}
+
+.track-rank {
+	font-size: 1.1rem;
+	font-weight: bold;
+	color: var(--brand);
+	width: 30px;
+	text-align: center;
+}
+
+.track-card img {
+	width: 50px;
+	height: 50px;
+	border-radius: 4px;
+	object-fit: cover;
+	border: 1px solid var(--image-border);
+}
+
+.track-info {
+	flex: 1;
+	min-width: 0;
+}
+
+.track-info h3 {
+	font-size: 0.95rem;
+	margin-bottom: 2px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.track-info p {
+	font-size: 0.8rem;
+	color: var(--muted);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.track-duration {
+	font-size: 0.75rem;
+	color: var(--faint);
+}
+
+.track-actions {
+	display: flex;
+	align-items: center;
+}
+
+.btn-preview {
+	padding: 6px 14px;
+	background-color: var(--field);
+	color: var(--text);
+	border: 1px solid var(--border-strong);
+	border-radius: 6px;
+	font-size: 0.8rem;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.btn-preview:hover:not(:disabled) {
+	background-color: var(--field-hover);
+}
+
+.btn-preview:disabled {
+	color: var(--faint);
+	cursor: not-allowed;
+}
+
+
+/* Phone */
+@media (max-width: 599px) {
+	.track-card {
+		gap: 10px;
+	}
+
+	.track-card img {
+		width: 46px;
+		height: 46px;
+	}
+}

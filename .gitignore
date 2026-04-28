@@ -1,0 +1,9 @@
+node_modules
+claude
+.env
+.DS_Store
+db/*.db
+
+# Ignore Claude files
+claude/*
+.claude/*

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>dawnFM* - Documentation</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+
+	<div id="navMount" data-active="documentation"></div>
+
+	<main class="container">
+		<section class="documentation-header">
+			<h1>Technical Documentation</h1>
+			<p>A starter outline for the final project documentation PDF.</p>
+		</section>
+
+		<section class="documentation-grid">
+			<article class="documentation-section">
+				<h2>1. Project Overview</h2>
+				<p><strong>dawnFM*</strong> is a personal Spotify stats dashboard for music listeners who want to see their listening habits outside of Spotify Wrapped. After signing in with Spotify, users can view their top tracks and top artists across Spotify's supported time ranges: <code>short_term</code>, <code>medium_term</code>, and <code>long_term</code>.</p>
+				<p>The app is designed for users like Joey from the original proposal: someone who listens to music constantly and wants an easy way to show their current music taste. The final version focuses on a working dashboard, artist search, track result modals, 30 second previews when available, light/dark mode, and a PDF export of the user's current stats.</p>
+			</article>
+
+			<article class="documentation-section">
+				<h2>2. Technical Architecture</h2>
+				<p>Explain the project structure, including the frontend pages, model classes, server routes, Spotify service, and local database.</p>
+				<div class="diagram-placeholder">Class diagram placeholder: Track, Artist, Spotify service, and server route flow.</div>
+			</article>
+
+			<article class="documentation-section">
+				<h2>3. Feature Walkthrough</h2>
+				<ul>
+					<li>Spotify login and dashboard stats.</li>
+					<li>Top tracks and top artists filters.</li>
+					<li>Artist search and detail modal.</li>
+					<li>Audio previews, theme toggle, and PDF export.</li>
+				</ul>
+			</article>
+
+			<article class="documentation-section">
+				<h2>4. API Documentation</h2>
+				<p>List the Spotify endpoints used, what data comes back, and how the app uses that data.</p>
+			</article>
+
+			<article class="documentation-section">
+				<h2>5. Challenges and Decisions</h2>
+				<p>The final version changed from the original proposal because Spotify's API and policy limits affected what data the app could safely and reliably show.</p>
+				<ul>
+					<li>Daily stats were removed because Spotify's top-items endpoint only supports <code>short_term</code>, <code>medium_term</code>, and <code>long_term</code> ranges.</li>
+					<li>Public artist data is not cached in the final project. Spotify's terms limit local caching of Spotify content to what is strictly necessary and temporary, so the app fetches artist and track data live instead.</li>
+					<li>The app stores only the logged-in user's profile/session data needed for the dashboard, and that data is removed when the user signs out.</li>
+					<li>Several Spotify values changed or were deprecated, including <code>Get Artist Top Tracks</code>, track <code>preview_url</code>, and the <code>popularity</code> field. Because of this, the artist modal uses Spotify Search for track results and <a href="https://www.npmjs.com/package/spotify-preview-finder" target="_blank" rel="noopener"><code>spotify-preview-finder</code></a> to locate preview clips when available.</li>
+					<li>The UI also had challenges, especially building a shared navigation bar that worked across every page while still showing the correct login state, profile image, display name, and dashboard link.</li>
+					<li>The responsive hamburger menu was another design decision because the desktop navigation did not fit well on smaller screens. GSAP was used to animate the menu opening, closing, and icon movement so the mobile experience felt intentional.</li>
+				</ul>
+			</article>
+
+			<article class="documentation-section">
+				<h2>6. How to Run</h2>
+				<p>Include setup steps for dependencies, environment variables, Spotify credentials, and starting the local server.</p>
+			</article>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch theme">☾</button>
+	</footer>
+
+	<script src="js/components/nav.js"></script>
+	<script src="js/utils/theme.js"></script>
+	<script src="js/pages/documentation.js"></script>
+</body>
+</html>

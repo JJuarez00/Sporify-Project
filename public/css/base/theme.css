@@ -1,0 +1,56 @@
+:root {
+	--bg: #0a0a0a;
+	--surface: #161616;
+	--surface-soft: #111;
+	--field: #1a1a1a;
+	--field-hover: #252525;
+	--text: #f0f0f0;
+	--muted: #888;
+	--faint: #555;
+	--border: #222;
+	--border-strong: #333;
+	--brand: #6095a8;
+	--brand-hover: #2f6b80;
+	--spotify: #1db954;
+	--spotify-hover: #1ed760;
+	--danger: #e74c3c;
+	--success: #2ecc71;
+	--nav-bg: rgba(20, 20, 20, 0.8);
+	--nav-border: rgba(255, 255, 255, 0.08);
+	--image-border: rgba(255, 255, 255, 0.18);
+	--rank-bg: rgba(0, 0, 0, 0.7);
+	--modal-bg: rgba(0, 0, 0, 0.7);
+}
+
+body.light-mode {
+	--bg: #f7f7fb;
+	--surface: #ffffff;
+	--surface-soft: #ffffff;
+	--field: #f0f1f7;
+	--field-hover: #e8eaf3;
+	--text: #171821;
+	--muted: #606575;
+	--faint: #8b91a3;
+	--border: #dde1ed;
+	--border-strong: #c7ccdc;
+	--brand: #235061;
+	--brand-hover: #1b4050;
+	--nav-bg: rgba(255, 255, 255, 0.94);
+	--nav-border: rgba(35, 80, 97, 0.26);
+	--image-border: rgba(0, 0, 0, 0.14);
+	--rank-bg: rgba(255, 255, 255, 0.85);
+	--modal-bg: rgba(0, 0, 0, 0.35);
+}
+
+body,
+.navbar,
+.site-footer,
+.about-card,
+.artist-card,
+.track-card,
+.modal-content,
+input,
+select,
+button {
+	transition: background-color 0.35s, color 0.35s, border-color 0.35s;
+}

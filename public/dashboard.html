@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>dawnFM* - Dashboard</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+	<div id="navMount" data-active="dashboard"></div>
+
+	<main class="container">
+
+		<!-- Not logged in -->
+		<section id="notLoggedIn" style="display: none;">
+			<div class="hero-section">
+				<h1>You are not signed in</h1>
+				<p class="hero-sub">Link your Spotify account to see your stats.</p>
+				<div class="hero-actions">
+					<a href="/login" class="btn-login">Link your Spotify</a>
+				</div>
+			</div>
+		</section>
+
+		<section id="dashboardLoading" class="loading-panel" style="display: none;">
+			<div class="loading-state">
+				<div class="loading-circle"></div>
+				<p>Loading your Spotify stats...</p>
+			</div>
+		</section>
+
+		<!-- Dashboard (hidden until data loads) -->
+		<section id="dashboard" style="visibility: hidden;">
+
+			<section class="dashboard-section">
+				<div class="section-header">
+					<div class="title-controls">
+						<h2>Top Tracks</h2>
+						<div id="trackControls" class="controls">
+							<select id="trackTimeRange" class="control-select">
+								<option value="short_term">Last 4 Weeks</option>
+								<option value="medium_term">Last 6 Months</option>
+								<option value="long_term">All Time</option>
+							</select>
+							<select id="trackLimit" class="control-select">
+								<option value="5" selected>5 Tracks</option>
+								<option value="10">10 Tracks</option>
+								<option value="20">20 Tracks</option>
+								<option value="50">50 Tracks</option>
+							</select>
+						</div>
+					</div>
+					<p class="preview-note">30 sec previews when available.</p>
+				</div>
+				<div id="topTracks" class="track-list"></div>
+			</section>
+
+			<section class="dashboard-section">
+				<div class="section-header">
+					<div class="title-controls">
+						<h2>Top Artists</h2>
+						<div id="artistControls" class="controls">
+							<select id="artistTimeRange" class="control-select">
+								<option value="short_term">Last 4 Weeks</option>
+								<option value="medium_term">Last 6 Months</option>
+								<option value="long_term">All Time</option>
+							</select>
+							<select id="artistLimit" class="control-select">
+								<option value="5" selected>5 Artists</option>
+								<option value="10">10 Artists</option>
+								<option value="20">20 Artists</option>
+								<option value="50">50 Artists</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div id="topArtists" class="artist-grid"></div>
+			</section>
+
+			<section class="dashboard-section">
+				<button id="exportPdf" class="btn-export">Export Stats as PDF</button>
+			</section>
+
+		</section>
+
+		<p id="message" class="message"></p>
+
+	</main>
+
+	<footer class="site-footer">
+		<button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch theme">☾</button>
+	</footer>
+
+	<script src="js/components/nav.js"></script>
+	<script src="js/utils/theme.js"></script>
+	<script src="js/models/Track.js"></script>
+	<script src="js/models/Artist.js"></script>
+	<script src="js/pages/dashboard.js"></script>
+
+</body>
+</html>

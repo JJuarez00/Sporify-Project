@@ -1,0 +1,22 @@
+/* Reset and Base */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: var(--bg);
+	color: var(--text);
+	min-height: 100vh;
+	padding-top: 90px;
+}
+
+/* Elements with this class start invisible and get animated in by GSAP */
+.anim {
+	opacity: 0;
+	transform: translateY(15px);
+}
+
+
