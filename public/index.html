@@ -4,6 +4,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>dawnFM*</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap">
 	<link rel="stylesheet" href="css/style.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
@@ -14,31 +17,20 @@
 	<main class="container">
 
 		<section id="hero" class="hero-section">
-			<h1 id="heroTitle" class="hero-title anim">Welcome</h1>
-			<p id="heroSub" class="hero-sub anim">This Is My Final Project For N320</p>
-			<p id="heroCourse" class="hero-sub anim">Intermediate Media Application Development</p>
+			<p class="home-label anim">N320 — Intermediate Media Application Development</p>
+			<h1 id="heroTitle" class="hero-title anim">dawnFM*</h1>
+			<p class="hero-sub anim">A Spotify stats dashboard built as a final project.</p>
+			<p class="hero-sub anim">Sign in with Spotify to see your top tracks and artists. The search page works without an account.</p>
 		</section>
 
 		<section id="aboutSection" class="about-section">
-			<h2 id="aboutTitle" class="anim">How does my final project work?</h2>
-			<div class="about-grid">
-				<div class="about-card anim">
-					<h3>Your Top Tracks</h3>
-					<p>See what songs you have been playing the most over the last 4 weeks, 6 months, or all time.</p>
-				</div>
-				<div class="about-card anim">
-					<h3>Your Top Artists</h3>
-					<p>Find out which artists dominate your listening history and discover your music taste.</p>
-				</div>
-				<div class="about-card anim">
-					<h3>Export Your Stats</h3>
-					<p>Download a simple PDF report with your current top tracks and artists.</p>
-				</div>
-				<div class="about-card anim">
-					<h3>Search Any Artist</h3>
-					<p>Look up any artist on Spotify and see track results from the Spotify Search API. No login required.</p>
-				</div>
-			</div>
+			<h2 id="aboutTitle" class="anim">What this project does</h2>
+			<ul class="home-list anim">
+				<li>View your top tracks and artists up to 4 weeks, 6 months, or all time</li>
+				<li>Search any artist on Spotify and preview their tracks</li>
+				<li>Export your current stats as a PDF</li>
+			</ul>
+			<p id="apiNote" class="home-note anim">Note: Spotify deprecated the artist top-tracks endpoint for dev-mode apps in February 2026. Artist results on the search page use Spotify Search as a workaround.</p>
 		</section>
 
 	</main>

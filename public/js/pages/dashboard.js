@@ -267,7 +267,6 @@ document.getElementById('exportPdf').addEventListener('click', function() {
 	doc.setFontSize(22);
 	doc.text('dawnFM* - My Stats', 20, 20);
 	doc.setFontSize(12);
-	doc.text('Generated: ' + new Date().toLocaleDateString(), 20, 30);
 	doc.setLineWidth(0.5);
 	doc.line(20, 35, 190, 35);
 

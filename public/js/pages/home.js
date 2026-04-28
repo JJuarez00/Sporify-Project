@@ -47,16 +47,9 @@ gsap.to('#mainNav', { opacity: 1, duration: 0.3 });
 
 let heroTl = gsap.timeline();
 heroTl
-	.to('#heroTitle', { opacity: 1, y: 0, duration: 0.4 })
-	.to('.hero-sub', { opacity: 1, y: 0, duration: 0.3, stagger: 0.08 }, '-=0.2');
+	.to('.home-label', { opacity: 1, y: 0, duration: 0.3 })
+	.to('#heroTitle', { opacity: 1, y: 0, duration: 0.4 }, '-=0.1')
+	.to('.hero-sub', { opacity: 1, y: 0, duration: 0.3, stagger: 0.08 }, '-=0.15');
 
-gsap.to('#aboutTitle', { opacity: 1, y: 0, duration: 0.3, delay: 0.5 });
-
-gsap.to('.about-card', {
-	opacity: 1,
-	y: 0,
-	duration: 0.3,
-	ease: 'power2.out',
-	stagger: 0.1,
-	delay: 0.6
-});
+gsap.to('#aboutTitle', { opacity: 1, y: 0, duration: 0.3, delay: 0.6 });
+gsap.to('.home-list', { opacity: 1, y: 0, duration: 0.3, delay: 0.75 });

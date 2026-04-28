@@ -1,15 +1,15 @@
 /* Hero Section */
 .hero-section {
 	text-align: center;
-	padding: 60px 0;
+	padding: 60px 0 40px;
 }
 
-.hero-eyebrow {
-	font-size: 0.9rem;
-	color: var(--brand);
+.home-label {
+	font-size: 0.78rem;
+	color: var(--muted);
 	text-transform: uppercase;
-	letter-spacing: 2px;
-	margin-bottom: 16px;
+	letter-spacing: 1.5px;
+	margin-bottom: 14px;
 }
 
 .hero-title {
@@ -20,97 +20,64 @@
 }
 
 .hero-sub {
-	font-size: 1.1rem;
+	font-size: 1rem;
 	color: var(--muted);
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 	max-width: 500px;
 	margin-left: auto;
 	margin-right: auto;
-}
-
-.hero-actions {
-	margin-top: 20px;
-}
-
-.btn-login {
-	display: inline-block;
-	padding: 14px 32px;
-	background-color: var(--spotify);
-	color: #fff;
-	text-decoration: none;
-	border-radius: 30px;
-	font-size: 1rem;
-	font-weight: bold;
-	transition: background-color 0.3s;
-}
-
-.btn-login:hover {
-	background-color: var(--spotify-hover);
+	line-height: 1.6;
 }
 
 
 /* About Section */
 .about-section {
+	text-align: center;
 	padding: 40px 0;
 }
 
 .about-section h2 {
-	text-align: center;
-	font-size: 1.5rem;
-	margin-bottom: 30px;
+	font-size: 1.4rem;
+	margin-bottom: 24px;
 }
 
-.about-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 16px;
+.home-list {
+	list-style: none;
+	max-width: 520px;
+	margin: 0 auto 28px;
 }
 
-.about-card {
-	background-color: var(--surface);
-	border: 1px solid var(--border);
-	border-radius: 10px;
-	padding: 24px;
-	transition: border-color 0.3s;
-}
-
-.about-card:hover {
-	border-color: var(--brand);
-}
-
-.about-card h3 {
-	font-size: 1rem;
-	margin-bottom: 8px;
-	color: var(--brand);
-}
-
-.about-card p {
+.home-list li {
 	font-size: 0.9rem;
 	color: var(--muted);
+	padding: 10px 0;
+	border-bottom: 1px solid var(--border);
 	line-height: 1.5;
 }
 
-
-/* Large screens */
-@media (min-width: 1200px) {
-	.hero-title {
-		font-size: 4.4rem;
-	}
+.home-list li:first-child {
+	border-top: 1px solid var(--border);
 }
+
+.home-note {
+	font-size: 0.78rem;
+	color: var(--faint);
+	max-width: 520px;
+	margin: 0 auto;
+	line-height: 1.6;
+}
+
+
 
 
 /* Medium screens */
 @media (min-width: 900px) and (max-width: 1199px) {
 	.hero-section {
-		padding: 72px 0;
+		padding: 72px 0 40px;
 	}
 
 	.hero-title {
 		font-size: 4.2rem;
-	}
-
-	.about-card {
-		padding: 28px;
 	}
 }
 
@@ -120,17 +87,13 @@
 	.hero-title {
 		font-size: 3.4rem;
 	}
-
-	.about-grid {
-		grid-template-columns: 1fr;
-	}
 }
 
 
 /* Phone */
 @media (max-width: 599px) {
 	.hero-section {
-		padding: 44px 0;
+		padding: 44px 0 32px;
 	}
 
 	.hero-title {
@@ -138,11 +101,6 @@
 	}
 
 	.hero-sub {
-		font-size: 1rem;
-	}
-
-	.about-grid {
-		grid-template-columns: 1fr;
+		font-size: 0.95rem;
 	}
 }
-
