@@ -17,14 +17,16 @@
 	<main class="container">
 		<section class="documentation-header">
 			<h1>Technical Documentation</h1>
-			<p>A starter outline for the final project documentation PDF.</p>
+			<p>N320 — Intermediate Media Application Development &mdash; Final Project</p>
 		</section>
 
 		<section class="documentation-grid">
+
 			<article class="documentation-section">
 				<h2>1. Project Overview</h2>
-				<p><strong>dawnFM*</strong> is a personal Spotify stats dashboard for music listeners who want to see their listening habits outside of Spotify Wrapped. After signing in with Spotify, users can view their top tracks and top artists across Spotify's supported time ranges: <code>short_term</code>, <code>medium_term</code>, and <code>long_term</code>.</p>
-				<p>The app is designed for users like Joey from the original proposal: someone who listens to music constantly and wants an easy way to show their current music taste. The final version focuses on a working dashboard, artist search, track result modals, 30 second previews when available, light/dark mode, and a PDF export of the user's current stats.</p>
+				<p><strong>dawnFM*</strong> is a Spotify stats dashboard built as a final project for N320. It gives users a way to see their listening habits at any time, not just once a year through Spotify Wrapped. After signing in with a Spotify account, users can view their top tracks and top artists across three time ranges: the last 4 weeks, the last 6 months, and all time.</p>
+				<p>The search page is open to anyone without an account. It lets you look up any artist on Spotify, browse track results, and play 30-second audio previews where available.</p>
+				<p>The project was designed to be straightforward: sign in, see your stats, explore artists. No tracking beyond what Spotify already provides, and no data stored beyond what is needed to keep the session running.</p>
 			</article>
 
 			<article class="documentation-section">
@@ -36,35 +38,154 @@
 			<article class="documentation-section">
 				<h2>3. Feature Walkthrough</h2>
 				<ul>
-					<li>Spotify login and dashboard stats.</li>
-					<li>Top tracks and top artists filters.</li>
-					<li>Artist search and detail modal.</li>
-					<li>Audio previews, theme toggle, and PDF export.</li>
+					<li>
+						<strong>Spotify Login</strong> — Users sign in through Spotify's OAuth flow. After authenticating, Spotify sends a temporary code back to the app, which gets exchanged for an access token and a refresh token. The access token is used to fetch personal data, and the refresh token is used to get a new one when it expires so the user does not have to sign in again.
+					</li>
+					<li>
+						<strong>Dashboard</strong> — The dashboard shows the user's top tracks and top artists side by side. Both sections have dropdowns to switch between time ranges and to control how many results are displayed. Tracks include a 30-second preview button when a clip is available.
+					</li>
+					<li>
+						<strong>Artist Search</strong> — The search page lets anyone look up an artist by name without signing in. Results come from Spotify Search and display as cards. Clicking a card opens a modal with track results for that artist, along with preview buttons where audio is available.
+					</li>
+					<li>
+						<strong>Audio Previews</strong> — Preview clips are sourced through the <code>spotify-preview-finder</code> package, since Spotify's native <code>preview_url</code> field was deprecated. Only one track plays at a time — starting a new preview automatically stops the previous one.
+					</li>
+					<li>
+						<strong>PDF Export</strong> — From the dashboard, users can download a PDF of their current top tracks and artists using the jsPDF library. The export reflects whatever time range and limit are currently selected.
+					</li>
+					<li>
+						<strong>Light / Dark Mode</strong> — A toggle button in the bottom right corner switches between light and dark mode. The preference is saved to <code>localStorage</code> so it persists across visits.
+					</li>
 				</ul>
 			</article>
 
 			<article class="documentation-section">
 				<h2>4. API Documentation</h2>
-				<p>List the Spotify endpoints used, what data comes back, and how the app uses that data.</p>
+				<p>The app connects to the Spotify Web API using two access methods depending on what data is needed.</p>
+
+				<h3>Client Credentials — no user login required</h3>
+				<p>Used for public catalog data like search results and artist details. The server requests a token using the app's client ID and secret and caches it until it expires.</p>
+				<table class="doc-table">
+					<thead>
+						<tr>
+							<th>Endpoint</th>
+							<th>What it's used for</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><code>POST /api/token</code></td>
+							<td>Requests a public access token using client credentials</td>
+						</tr>
+						<tr>
+							<td><code>GET /v1/search?type=artist</code></td>
+							<td>Searches for artists by name on the search page</td>
+						</tr>
+						<tr>
+							<td><code>GET /v1/artists/{id}</code></td>
+							<td>Fetches artist details (name, image) for the modal header</td>
+						</tr>
+						<tr>
+							<td><code>GET /v1/search?type=track</code></td>
+							<td>Gets track results for an artist — used as a replacement for the deprecated top-tracks endpoint</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<h3>Authorization Code Flow — user login required</h3>
+				<p>Used for personal listening data. The user signs in through Spotify and grants permission, and the app receives tokens scoped to that user's account.</p>
+				<table class="doc-table">
+					<thead>
+						<tr>
+							<th>Endpoint</th>
+							<th>What it's used for</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><code>POST /api/token</code> (code exchange)</td>
+							<td>Exchanges the OAuth callback code for an access token and refresh token</td>
+						</tr>
+						<tr>
+							<td><code>POST /api/token</code> (refresh)</td>
+							<td>Gets a new access token when the old one expires, without requiring the user to log in again</td>
+						</tr>
+						<tr>
+							<td><code>GET /v1/me</code></td>
+							<td>Fetches the logged-in user's display name, profile image, and Spotify ID</td>
+						</tr>
+						<tr>
+							<td><code>GET /v1/me/top/tracks</code></td>
+							<td>Fetches the user's top tracks for the selected time range and limit</td>
+						</tr>
+						<tr>
+							<td><code>GET /v1/me/top/artists</code></td>
+							<td>Fetches the user's top artists for the selected time range and limit</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<h3>Time ranges</h3>
+				<p>The top-items endpoints accept a <code>time_range</code> parameter with three possible values:</p>
+				<ul>
+					<li><code>short_term</code> — approximately the last 4 weeks</li>
+					<li><code>medium_term</code> — approximately the last 6 months</li>
+					<li><code>long_term</code> — calculated across all available listening history</li>
+				</ul>
 			</article>
 
 			<article class="documentation-section">
 				<h2>5. Challenges and Decisions</h2>
-				<p>The final version changed from the original proposal because Spotify's API and policy limits affected what data the app could safely and reliably show.</p>
+				<p>The final version of this project changed from the original proposal because of Spotify API deprecations and policy limits that affected what the app could reliably show.</p>
 				<ul>
-					<li>Daily stats were removed because Spotify's top-items endpoint only supports <code>short_term</code>, <code>medium_term</code>, and <code>long_term</code> ranges.</li>
-					<li>Public artist data is not cached in the final project. Spotify's terms limit local caching of Spotify content to what is strictly necessary and temporary, so the app fetches artist and track data live instead.</li>
-					<li>The app stores only the logged-in user's profile/session data needed for the dashboard, and that data is removed when the user signs out.</li>
-					<li>Several Spotify values changed or were deprecated, including <code>Get Artist Top Tracks</code>, track <code>preview_url</code>, and the <code>popularity</code> field. Because of this, the artist modal uses Spotify Search for track results and <a href="https://www.npmjs.com/package/spotify-preview-finder" target="_blank" rel="noopener"><code>spotify-preview-finder</code></a> to locate preview clips when available.</li>
-					<li>The UI also had challenges, especially building a shared navigation bar that worked across every page while still showing the correct login state, profile image, display name, and dashboard link.</li>
-					<li>The responsive hamburger menu was another design decision because the desktop navigation did not fit well on smaller screens. GSAP was used to animate the menu opening, closing, and icon movement so the mobile experience felt intentional.</li>
+					<li>
+						<strong>No daily stats</strong> — The original proposal planned for a daily time range, but Spotify's top-items endpoint only supports <code>short_term</code>, <code>medium_term</code>, and <code>long_term</code>. Daily breakdowns are not available through the API.
+					</li>
+					<li>
+						<strong>No caching of public artist data</strong> — Spotify's developer terms limit local caching of their content to what is strictly necessary. Public artist and track data is fetched live on each request rather than stored in the database.
+					</li>
+					<li>
+						<strong>Deprecated endpoints and fields</strong> — Spotify deprecated the <code>Get Artist Top Tracks</code> endpoint for dev-mode apps in February 2026, along with the native <code>preview_url</code> field on track objects. The app works around this by using Spotify Search for artist track results and the <a href="https://www.npmjs.com/package/spotify-preview-finder" target="_blank" rel="noopener"><code>spotify-preview-finder</code></a> package to locate audio preview clips.
+					</li>
+					<li>
+						<strong>Shared navigation state</strong> — The nav bar needed to show the correct login state, profile image, and dashboard link across every page. This was handled by injecting the nav from a shared <code>nav.js</code> component and running a session check on each page load to update the UI accordingly.
+					</li>
+					<li>
+						<strong>Mobile navigation</strong> — The desktop nav didn't fit well on smaller screens, so a hamburger menu was added for tablet and phone sizes. GSAP was used to animate the menu open and close, including the icon lines rotating into an X.
+					</li>
+					<li>
+						<strong>Parallel API requests</strong> — When loading preview URLs for multiple tracks, the original code fetched them one at a time in a loop, which was slow. This was replaced with <code>Promise.all</code> so all preview requests run at the same time.
+					</li>
 				</ul>
 			</article>
 
 			<article class="documentation-section">
 				<h2>6. How to Run</h2>
-				<p>Include setup steps for dependencies, environment variables, Spotify credentials, and starting the local server.</p>
+				<p>Follow these steps to run the project locally.</p>
+				<ol>
+					<li>
+						<strong>Install dependencies</strong>
+						<pre><code>npm install</code></pre>
+					</li>
+					<li>
+						<strong>Create a Spotify app</strong> — Go to <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">developer.spotify.com/dashboard</a>, create a new app, and add <code>http://localhost:3000/callback</code> as a redirect URI.
+					</li>
+					<li>
+						<strong>Set up environment variables</strong> — Create a <code>.env</code> file in the project root:
+						<pre><code>SPOTIFY_CLIENT_ID=your_client_id
+SPOTIFY_CLIENT_SECRET=your_client_secret
+SPOTIFY_REDIRECT_URI=http://localhost:3000/callback</code></pre>
+					</li>
+					<li>
+						<strong>Start the server</strong>
+						<pre><code>npm start</code></pre>
+					</li>
+					<li>
+						<strong>Open the app</strong> — Visit <code>http://localhost:3000</code> in a browser.
+					</li>
+				</ol>
 			</article>
+
 		</section>
 	</main>
 
