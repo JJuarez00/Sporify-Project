@@ -125,6 +125,51 @@
 	text-align: center;
 }
 
+.class-diagram {
+	display: flex;
+	gap: 16px;
+	flex-wrap: wrap;
+	margin-top: 12px;
+}
+
+.class-box {
+	flex: 1;
+	min-width: 200px;
+	border: 1px solid var(--border-strong);
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.class-box-name {
+	padding: 8px 14px;
+	background-color: var(--field);
+	border-bottom: 1px solid var(--border-strong);
+	font-weight: bold;
+	font-size: 0.9rem;
+	color: var(--brand);
+	text-align: center;
+}
+
+.class-box-section {
+	padding: 10px 14px;
+	border-bottom: 1px solid var(--border);
+}
+
+.class-box-section:last-child {
+	border-bottom: none;
+}
+
+.class-box-section p {
+	font-family: Consolas, Monaco, monospace;
+	font-size: 0.8rem;
+	color: var(--muted);
+	margin-bottom: 4px;
+}
+
+.class-box-section p:last-child {
+	margin-bottom: 0;
+}
+
 @media (max-width: 599px) {
 	.documentation-header {
 		padding-top: 36px;

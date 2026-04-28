@@ -30,8 +30,111 @@
 
 			<article class="documentation-section">
 				<h2>2. Technical Architecture</h2>
-				<p>Explain the project structure, including the frontend pages, model classes, server routes, Spotify service, and local database.</p>
-				<div class="diagram-placeholder">Class diagram placeholder: Track, Artist, Spotify service, and server route flow.</div>
+				<p>The project is split between a Node.js/Express backend and a vanilla JavaScript frontend. The server handles Spotify OAuth, session management, and API requests. The frontend uses class-based models to render UI components and page scripts to manage each page's behavior.</p>
+
+				<h3>Project Files</h3>
+				<table class="doc-table">
+					<thead>
+						<tr>
+							<th>File</th>
+							<th>Type</th>
+							<th>What it does</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><code>server.js</code></td>
+							<td>Server</td>
+							<td>Sets up Express, the SQLite database, and the session store</td>
+						</tr>
+						<tr>
+							<td><code>config/routes.js</code></td>
+							<td>Server</td>
+							<td>All API and auth route handlers</td>
+						</tr>
+						<tr>
+							<td><code>services/spotify.js</code></td>
+							<td>Service</td>
+							<td>All Spotify API calls — tokens, user data, search, and previews</td>
+						</tr>
+						<tr>
+							<td><code>db/dawnfm.db</code></td>
+							<td>Database</td>
+							<td>SQLite database — stores user profile and tokens per session</td>
+						</tr>
+						<tr>
+							<td><code>public/js/models/Artist.js</code></td>
+							<td>Model</td>
+							<td>Artist class — renders artist cards and the artist modal</td>
+						</tr>
+						<tr>
+							<td><code>public/js/models/Track.js</code></td>
+							<td>Model</td>
+							<td>Track class — renders track cards and handles audio preview playback</td>
+						</tr>
+						<tr>
+							<td><code>public/js/components/nav.js</code></td>
+							<td>Component</td>
+							<td>Shared navbar injected into every page at load time</td>
+						</tr>
+						<tr>
+							<td><code>public/js/utils/theme.js</code></td>
+							<td>Utility</td>
+							<td>Light/dark mode toggle, preference saved to localStorage</td>
+						</tr>
+						<tr>
+							<td><code>public/js/pages/dashboard.js</code></td>
+							<td>Page</td>
+							<td>Loads and displays the user's top tracks and artists</td>
+						</tr>
+						<tr>
+							<td><code>public/js/pages/search.js</code></td>
+							<td>Page</td>
+							<td>Artist search and modal logic</td>
+						</tr>
+						<tr>
+							<td><code>public/js/pages/home.js</code></td>
+							<td>Page</td>
+							<td>Home page animations and nav state</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<h3>Class Diagram</h3>
+				<div class="class-diagram">
+					<div class="class-box">
+						<div class="class-box-name">Artist</div>
+						<div class="class-box-section">
+							<p>+ spotifyId</p>
+							<p>+ name</p>
+							<p>+ image</p>
+						</div>
+						<div class="class-box-section">
+							<p>+ createSearchCard()</p>
+							<p>+ createDashboardCard(rank)</p>
+							<p>+ createModalContent(topTracks)</p>
+						</div>
+					</div>
+					<div class="class-box">
+						<div class="class-box-name">Track</div>
+						<div class="class-box-section">
+							<p>+ spotifyId</p>
+							<p>+ title</p>
+							<p>+ artist</p>
+							<p>+ albumArt</p>
+							<p>+ previewUrl</p>
+							<p>+ spotifyUrl</p>
+							<p>+ duration</p>
+						</div>
+						<div class="class-box-section">
+							<p>+ togglePreview()</p>
+							<p>+ stopPreview()</p>
+							<p>+ formatDuration()</p>
+							<p>+ createCard(rank)</p>
+							<p>+ createArtistRow(rank, albumName)</p>
+						</div>
+					</div>
+				</div>
 			</article>
 
 			<article class="documentation-section">
@@ -167,7 +270,7 @@
 						<pre><code>npm install</code></pre>
 					</li>
 					<li>
-						<strong>Create a Spotify app</strong> — Go to <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">developer.spotify.com/dashboard</a>, create a new app, and add <code>http://localhost:3000/callback</code> as a redirect URI.
+						<strong>Create a Spotify app</strong> — Go to <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">developer.spotify.com/dashboard</a>, create a new app, and add <code>http://127.0.0.1:3000/callback</code> as a redirect URI.
 					</li>
 					<li>
 						<strong>Set up environment variables</strong> — Create a <code>.env</code> file in the project root:
