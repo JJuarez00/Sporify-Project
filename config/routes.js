@@ -7,18 +7,21 @@
 const crypto = require('crypto');
 const spotify = require('../services/spotify.js');
 
+// Parses a specific cookie value from the request header by name
 function getCookie(req, name) {
 	let cookies = req.headers.cookie || '';
 	let match = cookies.match(new RegExp('(?:^|; )' + name + '=([^;]+)'));
 	return match ? decodeURIComponent(match[1]) : null;
 }
 
+// Looks up the session object for the current request using the session cookie
 function getSession(sessions, req) {
 	let sessionId = getCookie(req, 'session');
 	if (!sessionId) return null;
 	return sessions[sessionId] || null;
 }
 
+// Returns the database user record for the logged-in session, or null if not authenticated
 function getLoggedInUser(db, sessions, req) {
 	let session = getSession(sessions, req);
 	if (!session) return null;
@@ -61,11 +64,12 @@ async function addTrackPreviews(data) {
 	return data;
 }
 
-
+// module.exports exposes registerRoutes so server.js can require this file
 module.exports = function registerRoutes(app, db, sessions) {
 
-	// -- Auth Routes --
+	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
+	// Auth Routes
 	app.get('/login', function(req, res) {
 		let state = crypto.randomBytes(16).toString('hex');
 		res.setHeader('Set-Cookie', 'spotify_oauth_state=' + state + '; HttpOnly; Path=/; Max-Age=600; SameSite=Lax');
@@ -93,6 +97,8 @@ module.exports = function registerRoutes(app, db, sessions) {
 			let profile = await spotify.getUserProfile(tokenData.access_token);
 			let profileImg = (profile.images && profile.images.length > 0) ? profile.images[0].url : '';
 
+			// Inserts the user on first login, or updates their info if they already exist.
+			// COALESCE keeps the existing refresh token if Spotify didn't send a new one.
 			db.prepare(`
 				INSERT INTO users (spotifyId, displayName, profileImage, accessToken, refreshToken)
 				VALUES (?, ?, ?, ?, ?)
@@ -127,7 +133,37 @@ module.exports = function registerRoutes(app, db, sessions) {
 	});
 
 
-	// -- User API Routes (login required) --
+	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+
+	// Public API Routes (no login needed)
+
+	app.get('/api/search', async function(req, res) {
+		let query = req.query.q;
+		if (!query) return res.status(400).json({ error: 'Search query is required' });
+
+		try {
+			let data = await spotify.searchArtists(query);
+			res.json(data);
+		} catch (error) {
+			res.status(500).json({ error: 'Failed to search Spotify' });
+		}
+	});
+
+	app.get('/api/artist/:id', async function(req, res) {
+		try {
+			let data = await spotify.getArtistWithTopTracks(req.params.id);
+			res.json(data);
+		} catch (error) {
+			res.status(500).json({ error: 'Failed to fetch artist data' });
+		}
+	});
+
+
+	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+
+	// User API Routes (login required)
 
 	app.get('/api/check-session', function(req, res) {
 		let user = getLoggedInUser(db, sessions, req);
@@ -173,30 +209,6 @@ module.exports = function registerRoutes(app, db, sessions) {
 			res.json(data);
 		} catch (error) {
 			res.status(500).json({ error: 'Failed to fetch top artists' });
-		}
-	});
-
-
-	// -- Public API Routes (no login needed) --
-
-	app.get('/api/search', async function(req, res) {
-		let query = req.query.q;
-		if (!query) return res.status(400).json({ error: 'Search query is required' });
-
-		try {
-			let data = await spotify.searchArtists(query);
-			res.json(data);
-		} catch (error) {
-			res.status(500).json({ error: 'Failed to search Spotify' });
-		}
-	});
-
-	app.get('/api/artist/:id', async function(req, res) {
-		try {
-			let data = await spotify.getArtistWithTopTracks(req.params.id);
-			res.json(data);
-		} catch (error) {
-			res.status(500).json({ error: 'Failed to fetch artist data' });
 		}
 	});
 };

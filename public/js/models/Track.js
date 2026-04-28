@@ -1,5 +1,3 @@
-// Track.js
-// Represents a single music track
 // Handles audio preview playback and rendering track cards
 
 class Track {
@@ -24,6 +22,7 @@ class Track {
 		if (this.isPlaying) {
 			this.stopPreview();
 		} else {
+			// Stop any other track that is currently playing before starting this one
 			if (window.activeTrackPreview && window.activeTrackPreview !== this) {
 				window.activeTrackPreview.stopPreview();
 			}
@@ -54,6 +53,7 @@ class Track {
 		}
 	}
 
+	// Updates the preview button label, if a button reference has been set
 	setPreviewText(text) {
 		if (this.previewBtn) {
 			this.previewBtn.textContent = text;

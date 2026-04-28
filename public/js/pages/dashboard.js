@@ -16,6 +16,7 @@ let message = document.getElementById('message');
 let currentTracks = [];
 
 
+// Displays a status message that automatically clears after 3 seconds
 function showMessage(text, isError) {
 	message.textContent = text;
 	message.className = isError ? 'message error' : 'message success';
@@ -25,6 +26,7 @@ function showMessage(text, isError) {
 	}, 3000);
 }
 
+// Replaces a container's content with a spinning loading indicator
 function showLoading(container, text) {
 	container.innerHTML =
 		'<div class="loading-state">' +
@@ -40,6 +42,7 @@ function showLoading(container, text) {
 	});
 }
 
+// Shows the full-page loading overlay while data is being fetched on first load
 function startPageLoading() {
 	dashboardLoading.style.display = 'block';
 	gsap.to('#mainNav', { opacity: 1, duration: 0.3 });
@@ -55,6 +58,7 @@ function startPageLoading() {
 	});
 }
 
+// Hides the full-page loading overlay once data has finished loading
 function stopPageLoading() {
 	gsap.killTweensOf('#dashboardLoading .loading-circle');
 	dashboardLoading.style.display = 'none';
@@ -76,6 +80,8 @@ async function initDashboard() {
 		}
 
 		// Set nav profile info
+
+		// If the user doesn't have a profile image, use a blank string.
 		navProfilePic.src = data.profileImage || '';
 		document.getElementById('mobileNavProfilePic').src = data.profileImage || '';
 		navDisplayName.textContent = data.displayName;
@@ -217,12 +223,14 @@ function animateDashboard() {
 
 // Event Listeners
 
+// Reads the current dropdown values and triggers a track reload
 function loadSelectedTracks() {
 	let timeRange = document.getElementById('trackTimeRange').value;
 	let limit = document.getElementById('trackLimit').value;
 	return loadTopTracks(timeRange, limit);
 }
 
+// Reads the current dropdown values and triggers an artist reload
 function loadSelectedArtists() {
 	let timeRange = document.getElementById('artistTimeRange').value;
 	let limit = document.getElementById('artistLimit').value;

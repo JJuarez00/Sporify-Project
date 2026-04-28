@@ -53,6 +53,7 @@ let closeModal = document.getElementById('closeModal');
 let message = document.getElementById('message');
 
 
+// Displays a status message that automatically clears after 3 seconds
 function showMessage(text, isError) {
 	message.textContent = text;
 	message.className = isError ? 'message error' : 'message success';
@@ -62,6 +63,7 @@ function showMessage(text, isError) {
 	}, 3000);
 }
 
+// Replaces a container's content with a spinning loading indicator
 function showLoading(container, text) {
 	container.innerHTML =
 		'<div class="loading-state">' +

@@ -1,4 +1,3 @@
-// nav.js
 // Shared navbar for all pages
 
 let navMount = document.getElementById('navMount');
@@ -6,10 +5,12 @@ let navMount = document.getElementById('navMount');
 if (navMount) {
 	let activePage = navMount.dataset.active;
 
+	// Returns a class="active" attribute string if the given page matches the current page
 	function activeClass(pageName) {
 		return activePage === pageName ? ' class="active"' : '';
 	}
 
+	// Hides the dashboard link by default — shown only after a session check confirms login
 	let dashboardStyle = activePage === 'dashboard' ? '' : ' style="display: none;"';
 
 	navMount.innerHTML =
