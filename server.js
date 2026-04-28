@@ -8,7 +8,7 @@ require('dotenv').config();
 const registerRoutes = require('./config/routes.js');
 
 
-// -- Express Setup --
+// Express Setup
 const app = express();
 const PORT = 3000;
 
@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// -- Database Setup --
+// Database Setup
 const db = new Database(path.join(__dirname, 'db', 'dawnfm.db'));
 
 db.exec(`
@@ -32,15 +32,15 @@ db.exec(`
 `);
 
 
-// -- Session Store --
+// Session Store
 const sessions = {};
 
 
-// -- Routes --
+// Routes
 registerRoutes(app, db, sessions);
 
 
-// -- Start Server --
+// Start Server
 app.listen(PORT, function() {
 	console.log('dawnFM* server running at http://127.0.0.1:' + PORT);
 });
