@@ -132,6 +132,10 @@
 	margin-top: 12px;
 }
 
+.diagram-note {
+	margin-top: 18px;
+}
+
 .class-box {
 	flex: 1;
 	min-width: 200px;

@@ -118,6 +118,7 @@
 					<div class="class-box">
 						<div class="class-box-name">Track</div>
 						<div class="class-box-section">
+							<p>+ id</p>
 							<p>+ spotifyId</p>
 							<p>+ title</p>
 							<p>+ artist</p>
@@ -125,16 +126,38 @@
 							<p>+ previewUrl</p>
 							<p>+ spotifyUrl</p>
 							<p>+ duration</p>
+							<p>+ audio</p>
+							<p>+ isPlaying</p>
+							<p>+ previewBtn</p>
 						</div>
 						<div class="class-box-section">
 							<p>+ togglePreview()</p>
 							<p>+ stopPreview()</p>
+							<p>+ setPreviewText(text)</p>
 							<p>+ formatDuration()</p>
 							<p>+ createCard(rank)</p>
 							<p>+ createArtistRow(rank, albumName)</p>
 						</div>
 					</div>
 				</div>
+				<p class="diagram-note"><strong>Relationship:</strong> One <code>Artist</code> can create many <code>Track</code> objects through <code>Artist.createModalContent(topTracks)</code>, with each <code>Track</code> rendering one modal track row.</p>
+
+				<h3>Database Table</h3>
+				<div class="class-diagram">
+					<div class="class-box">
+						<div class="class-box-name">users</div>
+						<div class="class-box-section">
+							<p>+ id</p>
+							<p>+ spotifyId</p>
+							<p>+ displayName</p>
+							<p>+ profileImage</p>
+							<p>+ accessToken</p>
+							<p>+ refreshToken</p>
+							<p>+ createdAt</p>
+						</div>
+					</div>
+				</div>
+				<p class="diagram-note">The <code>users</code> table is the only table in the local SQLite database. It stores the logged-in Spotify user's profile and tokens so the session can stay connected. Track and artist data are not stored locally; they are fetched live from Spotify when needed.</p>
 			</article>
 
 			<article class="documentation-section">

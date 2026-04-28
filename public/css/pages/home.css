@@ -67,6 +67,10 @@
 	line-height: 1.6;
 }
 
+.home-note + .home-note {
+	margin-top: 10px;
+}
+
 
 
 

@@ -53,3 +53,4 @@ heroTl
 
 gsap.to('#aboutTitle', { opacity: 1, y: 0, duration: 0.3, delay: 0.6 });
 gsap.to('.home-list', { opacity: 1, y: 0, duration: 0.3, delay: 0.75 });
+gsap.to('.home-note', { opacity: 1, y: 0, duration: 0.3, stagger: 0.08, delay: 0.9 });
