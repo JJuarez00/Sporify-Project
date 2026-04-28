@@ -5,4 +5,4 @@
 
 ---
 
-<h2 align="Left">How to run this project</h3>
+<h3 align="Left">How to run this project</h3>
